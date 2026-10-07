@@ -1,0 +1,21 @@
+name: Engine and build checks
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.20.0'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run lint
+      - run: npm run build
+      - name: Seeded game-engine smoke test (rule-based NPCs)
+        run: node --import tsx scripts/smokeMatch.ts

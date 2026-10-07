@@ -15,7 +15,7 @@ import {
   refreshShop,
   sellMinion,
   upgradeTavern,
-  useHeroPower,
+  activateHeroPower,
 } from './shopEngine';
 import type { AIPersonality, PlayerState, Tribe } from './types';
 
@@ -152,7 +152,7 @@ export function runAITurn(
   // Use hero power if useful
   const hero = getHeroDef(player.heroId);
   if (hero.heroPower.type === 'active' && rng.chance(0.4 + skill * 0.4)) {
-    useHeroPower(player, pool, rng);
+    activateHeroPower(player, pool, rng);
   }
 
   while (actions++ < maxActions) {

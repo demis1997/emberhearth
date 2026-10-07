@@ -232,7 +232,7 @@ export function upgradeTavern(player: PlayerState): boolean {
   return true;
 }
 
-export function useHeroPower(
+export function activateHeroPower(
   player: PlayerState,
   pool: MinionPool,
   rng: SeededRNG,

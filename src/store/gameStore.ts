@@ -14,7 +14,7 @@ import {
   sellMinion,
   toggleFreeze,
   upgradeTavern,
-  useHeroPower,
+  activateHeroPower,
 } from '../engine/shopEngine';
 import { createMinionInstance } from '../engine/minionFactory';
 import { soundManager } from '../audio/soundManager';
@@ -206,7 +206,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   heroPower: () => {
     const m = get().match;
     if (!m) return;
-    if (useHeroPower(m.getHuman(), m.pool, m.rng)) {
+    if (activateHeroPower(m.getHuman(), m.pool, m.rng)) {
       soundManager.play('click');
       set({ matchState: snapshot(m) });
     }

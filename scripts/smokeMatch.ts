@@ -2,6 +2,7 @@
  * Headless smoke test: run a full AI-only match to verify engine stability.
  * Usage: npx tsx scripts/smokeMatch.ts
  */
+import assert from 'node:assert/strict';
 import { MatchManager } from '../src/engine/matchManager';
 import { runAITurn } from '../src/engine/aiEngine';
 import { resolveEndOfTurn } from '../src/engine/abilityEngine';
@@ -36,5 +37,11 @@ console.log('Final placement', human.placement);
 console.log(
   'All placements',
   m.state.players.map((p) => `${p.name}:${p.placement}`).join(', '),
+);
+assert.equal(m.state.phase, 'matchOver', 'Seeded match must terminate within 40 rounds');
+assert.deepEqual(
+  m.state.players.map((p) => p.placement).sort((a, b) => (a ?? 0) - (b ?? 0)),
+  [1, 2, 3, 4, 5, 6, 7, 8],
+  'Every player must receive a unique final placement',
 );
 console.log('OK');
