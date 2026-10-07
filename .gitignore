@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local environments and generated artifacts
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
